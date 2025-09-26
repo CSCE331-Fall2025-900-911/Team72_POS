@@ -3,6 +3,13 @@ import os
 import random
 from datetime import datetime, timedelta
 
+"""
+HOW THIS WORKS: build customers and employees. Then populates lists for each column (i.e. one list that contains all of the 10000 entries for that column).
+And then it puts it in the CSV.
+"""
+
+
+
 def populate_csv():
     """
     Script to populate a CSV file with 1000 entries of generated data.
