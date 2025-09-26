@@ -28,7 +28,7 @@ def populate_csv():
         "c_first_name",
         "c_last_name",
         "c_phone",
-        "c_points",
+        # "c_points",
         "receipt_id",
         "cost",
         "tip",
@@ -159,7 +159,7 @@ def populate_csv():
         c_phone_list.append(cust_record[3])
     
     # Customer points (0-1000) - this can vary per transaction
-    c_points_list = [random.randint(0, 1000) for _ in range(NUM_ENTRIES)]
+    # c_points_list = [random.randint(0, 1000) for _ in range(NUM_ENTRIES)]
     
     # Receipt IDs (unique sequential)
     receipt_ids = list(range(1, NUM_ENTRIES + 1))
@@ -193,7 +193,7 @@ def populate_csv():
             c_first_name_list[i],
             c_last_name_list[i],
             c_phone_list[i],
-            c_points_list[i],
+            # c_points_list[i],
             receipt_ids[i],
             cost_list[i],
             tip_list[i],
