@@ -11,7 +11,7 @@ def populate_sharetea_menu(output_filename: str = "sharetea_menu.csv"):
     Columns: Item ID, Item Name, Item Category, Item Cost, Ingredients
     """
 
-    headers = ["Item ID", "Item Name", "Item Category", "Item Cost", "Ingredients"]
+    headers = ["ItemID", "ItemName", "ItemCategory", "ItemCost", "Ingredients"]
 
     menu_records = [
         (0, "Wintermelon", "Milk Foam", "5.65", ""),
