@@ -35,37 +35,123 @@ def populate_csv():
     # Configure the number of entries to generate
     NUM_ENTRIES = 1000
     
-    # Build lists for each column (1000 entries each)
+    # =================================
+    # CONSISTENT EMPLOYEE DATA
+    # =================================
+    # Create consistent employee records (ID, first name, last name, password stay together)
+    employee_records = [
+        (1, "John", "Smith", "pass1001"),
+        (2, "Jane", "Johnson", "pass1002"),
+        (3, "Mike", "Williams", "pass1003"),
+        (4, "Sarah", "Brown", "pass1004"),
+        (5, "David", "Jones", "pass1005"),
+        (6, "Lisa", "Garcia", "pass1006"),
+        (7, "Chris", "Miller", "pass1007"),
+        (8, "Amy", "Davis", "pass1008"),
+        (9, "Tom", "Rodriguez", "pass1009"),
+        (10, "Emma", "Martinez", "pass1010"),
+        (11, "Alex", "Anderson", "pass1011"),
+        (12, "Maria", "Taylor", "pass1012"),
+        (13, "James", "Thomas", "pass1013"),
+        (14, "Jessica", "Jackson", "pass1014"),
+        (15, "Robert", "White", "pass1015"),
+        (16, "Ashley", "Harris", "pass1016"),
+        (17, "Michael", "Martin", "pass1017"),
+        (18, "Jennifer", "Thompson", "pass1018"),
+        (19, "William", "Garcia", "pass1019"),
+        (20, "Linda", "Martinez", "pass1020"),
+        (21, "Richard", "Robinson", "pass1021"),
+        (22, "Patricia", "Clark", "pass1022"),
+        (23, "Charles", "Lewis", "pass1023"),
+        (24, "Barbara", "Lee", "pass1024"),
+        (25, "Joseph", "Walker", "pass1025"),
+        (26, "Susan", "Hall", "pass1026"),
+        (27, "Thomas", "Allen", "pass1027"),
+        (28, "Karen", "Young", "pass1028"),
+        (29, "Christopher", "Hernandez", "pass1029"),
+        (30, "Nancy", "King", "pass1030"),
+        (31, "Daniel", "Wright", "pass1031"),
+        (32, "Betty", "Lopez", "pass1032"),
+        (33, "Matthew", "Hill", "pass1033"),
+        (34, "Helen", "Scott", "pass1034"),
+        (35, "Anthony", "Green", "pass1035"),
+        (36, "Sandra", "Adams", "pass1036"),
+        (37, "Mark", "Baker", "pass1037"),
+        (38, "Donna", "Gonzalez", "pass1038"),
+        (39, "Donald", "Nelson", "pass1039"),
+        (40, "Carol", "Carter", "pass1040"),
+        (41, "Steven", "Mitchell", "pass1041"),
+        (42, "Ruth", "Perez", "pass1042"),
+        (43, "Paul", "Roberts", "pass1043"),
+        (44, "Sharon", "Turner", "pass1044"),
+        (45, "Andrew", "Phillips", "pass1045"),
+        (46, "Michelle", "Campbell", "pass1046"),
+        (47, "Kenneth", "Parker", "pass1047"),
+        (48, "Laura", "Evans", "pass1048"),
+        (49, "Joshua", "Edwards", "pass1049"),
+        (50, "Sarah", "Collins", "pass1050")
+    ]
     
-    # Employee IDs (1-50, cycling through)
-    e_ids = [i % 50 + 1 for i in range(NUM_ENTRIES)]
+    # =================================
+    # CONSISTENT CUSTOMER DATA  
+    # =================================
+    # Create consistent customer records (ID, first name, last name, phone stay together)
+    customer_records = [
+        (1, "Alice", "Anderson", "214-555-0101"),
+        (2, "Bob", "Baker", "214-555-0102"),
+        (3, "Carol", "Carter", "214-555-0103"),
+        (4, "Dan", "Davis", "214-555-0104"),
+        (5, "Eve", "Evans", "214-555-0105"),
+        (6, "Frank", "Fisher", "214-555-0106"),
+        (7, "Grace", "Garcia", "214-555-0107"),
+        (8, "Henry", "Harris", "214-555-0108"),
+        (9, "Ivy", "Johnson", "214-555-0109"),
+        (10, "Jack", "Jones", "214-555-0110"),
+        # Add more customer records as needed - this is just a sample
+        # You can extend this list up to 500 customers
+    ]
     
-    # Employee first names
-    e_first_names = ["John", "Jane", "Mike", "Sarah", "David", "Lisa", "Chris", "Amy", "Tom", "Emma"]
-    e_first_name_list = [random.choice(e_first_names) for _ in range(NUM_ENTRIES)]
+    # Extend customer records to have at least 100 unique customers
+    base_customers = customer_records.copy()
+    while len(customer_records) < 100:
+        base_id = len(customer_records) + 1
+        first_names = ["Alice", "Bob", "Carol", "Dan", "Eve", "Frank", "Grace", "Henry", "Ivy", "Jack"]
+        last_names = ["Anderson", "Baker", "Carter", "Davis", "Evans", "Fisher", "Garcia", "Harris", "Johnson", "Jones"]
+        customer_records.append((
+            base_id,
+            random.choice(first_names),
+            random.choice(last_names),
+            f"214-555-{base_id:04d}"
+        ))
     
-    # Employee last names
-    e_last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez"]
-    e_last_name_list = [random.choice(e_last_names) for _ in range(NUM_ENTRIES)]
+    # Build lists for 1000 entries by selecting from consistent records
+    # Employee data (cycling through the 50 employees)
+    e_ids = []
+    e_first_name_list = []
+    e_last_name_list = []
+    e_password_list = []
     
-    # Employee passwords (simple generated passwords)
-    e_password_list = [f"pass{random.randint(1000, 9999)}" for _ in range(NUM_ENTRIES)]
+    for i in range(NUM_ENTRIES):
+        emp_record = employee_records[i % len(employee_records)]
+        e_ids.append(emp_record[0])
+        e_first_name_list.append(emp_record[1])
+        e_last_name_list.append(emp_record[2])
+        e_password_list.append(emp_record[3])
     
-    # Customer IDs (1-500, cycling through)
-    c_ids = [i % 500 + 1 for i in range(NUM_ENTRIES)]
+    # Customer data (cycling through the customers)
+    c_ids = []
+    c_first_name_list = []
+    c_last_name_list = []
+    c_phone_list = []
     
-    # Customer first names
-    c_first_names = ["Alice", "Bob", "Carol", "Dan", "Eve", "Frank", "Grace", "Henry", "Ivy", "Jack"]
-    c_first_name_list = [random.choice(c_first_names) for _ in range(NUM_ENTRIES)]
+    for i in range(NUM_ENTRIES):
+        cust_record = customer_records[i % len(customer_records)]
+        c_ids.append(cust_record[0])
+        c_first_name_list.append(cust_record[1])
+        c_last_name_list.append(cust_record[2])
+        c_phone_list.append(cust_record[3])
     
-    # Customer last names
-    c_last_names = ["Anderson", "Taylor", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez"]
-    c_last_name_list = [random.choice(c_last_names) for _ in range(NUM_ENTRIES)]
-    
-    # Customer phone numbers
-    c_phone_list = [f"{random.randint(200, 999)}-{random.randint(200, 999)}-{random.randint(1000, 9999)}" for _ in range(NUM_ENTRIES)]
-    
-    # Customer points (0-1000)
+    # Customer points (0-1000) - this can vary per transaction
     c_points_list = [random.randint(0, 1000) for _ in range(NUM_ENTRIES)]
     
     # Receipt IDs (unique sequential)
