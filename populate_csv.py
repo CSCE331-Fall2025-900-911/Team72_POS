@@ -155,4 +155,4 @@ if __name__ == "__main__":
     populate_csv()
     
     # Optionally read and display the contents
-    read_csv()
+    # read_csv()
