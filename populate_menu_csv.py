@@ -1,8 +1,5 @@
 import csv
 import os
-import random
-import csv
-import os
 
 
 def populate_sharetea_menu(output_filename: str = "sharetea_menu.csv"):
@@ -13,28 +10,29 @@ def populate_sharetea_menu(output_filename: str = "sharetea_menu.csv"):
 
     headers = ["ItemID", "ItemName", "ItemCategory", "ItemCost", "Ingredients"]
 
+    # ItemCost stored as integer cents (e.g. $5.65 => 565). Empty/unknown costs => 0
     menu_records = [
-        (0, "Wintermelon", "Milk Foam", "5.65", ""),
-        (1, "Green Tea", "Milk Foam", "", ""),
-        (2, "Black Tea", "Milk Foam", "", ""),
-        (3, "Oolong Tea", "Milk Foam", "", ""),
-        (4, "Pearl Milk Tea", "Milk Tea", "5.80", ""),
-        (5, "Caramel Milk Tea", "Milk Tea", "", ""),
-        (6, "Milk Coffee", "Milk Tea", "", ""),
-        (7, "Coffee Milk Tea", "Milk Tea", "6.25", ""),
-        (8, "Milk Foam Black Coffee", "Coffee", "", ""),
-        (9, "Stuff", "Coffee", "", ""),
-        (10, "Stuff23", "Coffee", "", ""),
-        (11, "Match Pearl Milk Tea", "Matcha", "6.50", ""),
-        (12, "Mango Match Fresh Milk", "Matcha", "6.50", ""),
-        (13, "Strawberry Matcha Fresh Milk", "Matcha", "6.50", ""),
-        (14, "Match Fresh Milk", "Matcha", "6.25", ""),
-        (15, "Match Ice Blended", "Matcha", "6.50", ""),
-        (16, "Peach Tea w/ Honey Jelly (Black/Green/Oolong Tea)", "Fruity Beverage", "6.25", ""),
-        (17, "Honey Lemonade", "Fruity Beverage", "5.20", ""),
-        (18, "Mango Green Tea", "Fruity Beverage", "5.80", ""),
-        (19, "Mango & Passion Fruit Tea", "Fruity Beverage", "6.25", ""),
-        (20, "Berry Lychee Burst", "Fruity Beverage", "6.25", ""),
+        (0, "Wintermelon", "Milk Foam", 565, ""),
+        (1, "Green Tea", "Milk Foam", 0, ""),
+        (2, "Black Tea", "Milk Foam", 0, ""),
+        (3, "Oolong Tea", "Milk Foam", 0, ""),
+        (4, "Pearl Milk Tea", "Milk Tea", 580, ""),
+        (5, "Caramel Milk Tea", "Milk Tea", 0, ""),
+        (6, "Milk Coffee", "Milk Tea", 0, ""),
+        (7, "Coffee Milk Tea", "Milk Tea", 625, ""),
+        (8, "Milk Foam Black Coffee", "Coffee", 0, ""),
+        (9, "Stuff", "Coffee", 0, ""),
+        (10, "Stuff23", "Coffee", 0, ""),
+        (11, "Match Pearl Milk Tea", "Matcha", 650, ""),
+        (12, "Mango Match Fresh Milk", "Matcha", 650, ""),
+        (13, "Strawberry Matcha Fresh Milk", "Matcha", 650, ""),
+        (14, "Match Fresh Milk", "Matcha", 625, ""),
+        (15, "Match Ice Blended", "Matcha", 650, ""),
+        (16, "Peach Tea w/ Honey Jelly (Black/Green/Oolong Tea)", "Fruity Beverage", 625, ""),
+        (17, "Honey Lemonade", "Fruity Beverage", 520, ""),
+        (18, "Mango Green Tea", "Fruity Beverage", 580, ""),
+        (19, "Mango & Passion Fruit Tea", "Fruity Beverage", 625, ""),
+        (20, "Berry Lychee Burst", "Fruity Beverage", 625, ""),
     ]
 
     csv_filepath = os.path.join(os.getcwd(), output_filename)
