@@ -12,7 +12,7 @@ And then it puts it in the CSV.
 """
 ##########
 # TODO
-# tips: decimal between 0 and 0.2
+# tips: decimal between 0 and 0.2 (maybe - also consider custom tips)
 # dates: last year
 ##########
 
@@ -230,8 +230,11 @@ def populate_csv():
             try:
                 creds_path = os.environ.get('GOOGLE_CREDENTIALS_PATH', 'credentials.json')
                 spreadsheet_id = os.environ.get('GOOGLE_SHEETS_SPREADSHEET_ID')
+                # Optional: specify the sheet/tab name (worksheet) to write to
+                # Default is 'Sheet1' if not provided
+                sheet_name = os.environ.get('GOOGLE_SHEETS_SHEET_NAME', 'Sheet1')
                 # Call the uploader; it prints the result and returns the URL
-                upload_csv_to_google_sheets(csv_filepath, spreadsheet_id=spreadsheet_id, creds_path=creds_path)
+                upload_csv_to_google_sheets(csv_filepath, spreadsheet_id=spreadsheet_id, sheet_name=sheet_name, creds_path=creds_path)
             except Exception as upload_err:
                 print(f"Upload to Google Sheets skipped/failed: {upload_err}")
     
