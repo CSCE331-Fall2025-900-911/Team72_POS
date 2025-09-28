@@ -28,20 +28,21 @@ def populate_csv():
     # =================================
     # Define your column headers here
     column_headers = [
-        "e_id",
+        "RECEIPT_ID",
+        "EMPLOYEE_ID",
         # "e_first_name",
         # "e_last_name",
         # "e_password",
-        "c_id",
+        "CUSTOMER_ID",
         # "c_first_name",
         # "c_last_name",
         # "c_phone",
         # "c_points",
-        "receipt_id",
+       
         # "cost",
-        "tip",
-        "hour",
-        "date",
+        "TIP",
+        "ORDER_TIME",
+        "ORDER_DATE",
     ]
     
     # =================================
@@ -190,13 +191,14 @@ def populate_csv():
     date_list = [(start_date + timedelta(days=random.randint(0, 365))).strftime("%Y-%m-%d") for _ in range(NUM_ENTRIES)]
     
     # CSV file configuration
-    csv_filename = "receipt_data.csv"
+    csv_filename = "/csv_data/receipt_data.csv"
     csv_filepath = os.path.join(os.getcwd(), csv_filename)
     
     # Combine all lists into rows
     data_rows = []
     for i in range(NUM_ENTRIES):
         row = [
+            receipt_ids[i],
             e_ids[i],
             # e_first_name_list[i],
             # e_last_name_list[i],
@@ -206,7 +208,7 @@ def populate_csv():
             # c_last_name_list[i],
             # c_phone_list[i],
             # c_points_list[i],
-            receipt_ids[i],
+           
             # cost_list[i],
             tip_list[i],
             hour_list[i],
