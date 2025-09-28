@@ -12,8 +12,8 @@ And then it puts it in the CSV.
 """
 ##########
 # TODO
-# tips: decimal between 0 and 0.2
-# dates: last year
+# employee ids: two employees per day. And less employees (?)
+# customer ids: make more customers (around 80000)
 ##########
 
 
