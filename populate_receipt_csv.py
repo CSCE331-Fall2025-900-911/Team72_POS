@@ -3,10 +3,18 @@ import os
 import random
 from datetime import datetime, timedelta
 
+# call upload helper after creation
+from upload_to_sheets import upload_csv_to_google_sheets
+
 """
 HOW THIS WORKS: build customers and employees. Then populates lists for each column (i.e. one list that contains all of the 10000 entries for that column).
 And then it puts it in the CSV.
 """
+##########
+# TODO
+# tips: decimal between 0 and 0.2
+# dates: last year
+##########
 
 
 
@@ -21,16 +29,16 @@ def populate_csv():
     # Define your column headers here
     column_headers = [
         "e_id",
-        "e_first_name",
-        "e_last_name",
-        "e_password",
+        # "e_first_name",
+        # "e_last_name",
+        # "e_password",
         "c_id",
-        "c_first_name",
-        "c_last_name",
-        "c_phone",
-        "c_points",
+        # "c_first_name",
+        # "c_last_name",
+        # "c_phone",
+        # "c_points",
         "receipt_id",
-        "cost",
+        # "cost",
         "tip",
         "hour",
         "date",
@@ -40,7 +48,7 @@ def populate_csv():
     # DATA LISTS FOR EACH COLUMN
     # =================================
     # Configure the number of entries to generate
-    NUM_ENTRIES = 1000
+    NUM_ENTRIES = 1000000
     
     # =================================
     # CONSISTENT EMPLOYEE DATA
@@ -159,7 +167,7 @@ def populate_csv():
         c_phone_list.append(cust_record[3])
     
     # Customer points (0-1000) - this can vary per transaction
-    c_points_list = [random.randint(0, 1000) for _ in range(NUM_ENTRIES)]
+    # c_points_list = [random.randint(0, 1000) for _ in range(NUM_ENTRIES)]
     
     # Receipt IDs (unique sequential)
     receipt_ids = list(range(1, NUM_ENTRIES + 1))
@@ -167,11 +175,15 @@ def populate_csv():
     # Costs ($5.00 - $50.00)
     cost_list = [round(random.uniform(5.00, 50.00), 2) for _ in range(NUM_ENTRIES)]
     
-    # Tips (0% - 25% of cost)
-    tip_list = [round(cost_list[i] * random.uniform(0, 0.25), 2) for i in range(NUM_ENTRIES)]
-    
-    # Hours (0-23)
-    hour_list = [random.randint(0, 23) for _ in range(NUM_ENTRIES)]
+    # Tips (0% - 50%, skewed toward lower values)
+    # tip_list = [round(cost_list[i] * random.uniform(0, 0.25), 2) for i in range(NUM_ENTRIES)]
+    tip_list = [
+        round(min(random.betavariate(1, 9), 0.5), 2)
+        for i in range(NUM_ENTRIES)
+    ]
+
+    # Hours (0-23 because hours are 11AM-11PM)
+    hour_list = [random.randint(11, 23) for _ in range(NUM_ENTRIES)]
     
     # Dates (random dates within the last year)
     start_date = datetime.now() - timedelta(days=365)
@@ -186,16 +198,16 @@ def populate_csv():
     for i in range(NUM_ENTRIES):
         row = [
             e_ids[i],
-            e_first_name_list[i],
-            e_last_name_list[i],
-            e_password_list[i],
+            # e_first_name_list[i],
+            # e_last_name_list[i],
+            # e_password_list[i],
             c_ids[i],
-            c_first_name_list[i],
-            c_last_name_list[i],
-            c_phone_list[i],
-            c_points_list[i],
+            # c_first_name_list[i],
+            # c_last_name_list[i],
+            # c_phone_list[i],
+            # c_points_list[i],
             receipt_ids[i],
-            cost_list[i],
+            # cost_list[i],
             tip_list[i],
             hour_list[i],
             date_list[i]
@@ -218,6 +230,17 @@ def populate_csv():
             print(f"File location: {csv_filepath}")
             print(f"Total rows written: {len(data_rows) + 1} (including header)")
             print(f"Generated {NUM_ENTRIES} entries with realistic data")
+            # Attempt to upload to Google Sheets if credentials/spreadsheet are configured
+            try:
+                creds_path = os.environ.get('GOOGLE_CREDENTIALS_PATH', 'credentials.json')
+                spreadsheet_id = os.environ.get('GOOGLE_SHEETS_SPREADSHEET_ID')
+                # Optional: specify the sheet/tab name (worksheet) to write to
+                # Default is 'Sheet1' if not provided
+                sheet_name = os.environ.get('GOOGLE_SHEETS_SHEET_NAME', 'Sheet1')
+                # Call the uploader; it prints the result and returns the URL
+                upload_csv_to_google_sheets(csv_filepath, spreadsheet_id=spreadsheet_id, sheet_name=sheet_name, creds_path=creds_path)
+            except Exception as upload_err:
+                print(f"Upload to Google Sheets skipped/failed: {upload_err}")
     
     except Exception as e:
         print(f"Error writing to CSV file: {e}")
