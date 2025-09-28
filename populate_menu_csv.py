@@ -2,7 +2,7 @@ import csv
 import os
 
 
-def populate_sharetea_menu(output_filename: str = "csv_data/sharetea_menu.csv"):
+def populate_sharetea_menu(output_filename: str = "csv_data/items.csv"):
     """Create a CSV file containing the Sharetea menu items.
 
     Columns: Item ID, Item Name, Item Category, Item Cost, Ingredients

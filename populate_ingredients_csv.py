@@ -32,7 +32,7 @@ def populate_ingredients_csv(output_filename: str = "csv_data/ingredients.csv"):
     (17, "Green Tea", 1000, "Cups"),
     (18, "Strawberry Pulp Syrup", 1000, "Pumps"),
     (19, "Oolong Tea", 1000, "Cups"),
-    (20, "Brown Sugar", 1000, "Tablespoon"),
+    (20, "Brown Sugar", 1000, "Tbsp"),
     (21, "Caramel Syrup", 1000, "Pumps"),
     (22, "Coffee", 1000, "Cups"),
     (23, "Early Grey Tea", 1000, "Cups"),
