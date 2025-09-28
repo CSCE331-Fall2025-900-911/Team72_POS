@@ -2,7 +2,7 @@ import csv
 import os
 
 
-def populate_recipe_csv(output_filename: str = "recipes.csv"):
+def populate_recipe_csv(output_filename: str = "csv_data/recipes.csv"):
     """Create a CSV file containing the recipe mappings.
 
     Columns: RecipeID, ItemID, IngredientID
