@@ -43,7 +43,7 @@ def populate_order_csv():
     """
     # Configurable via environment variables
     NUM_RECEIPTS = parse_int('ORDER_NUM_RECEIPTS', 1000000)
-    OUTPUT_FILENAME = os.environ.get('ORDER_OUTPUT', 'order_data.csv')
+    OUTPUT_FILENAME = os.environ.get('ORDER_OUTPUT', 'csv_data/order_data.csv')
     # Default menu size
     menu_items = parse_menu_items('ORDER_MENU_ITEMS', 20)
 
@@ -69,7 +69,7 @@ def populate_order_csv():
 
     with open(OUTPUT_FILENAME, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['order_id', 'receipt_id', 'item_id'])
+        writer.writerow(['ORDER_ID', 'RECEIPT_ID', 'ITEM_ID'])
 
         for receipt_id in range(1, NUM_RECEIPTS + 1):
             # choose how many items this receipt has
