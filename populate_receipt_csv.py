@@ -12,7 +12,7 @@ And then it puts it in the CSV.
 """
 ##########
 # TODO
-# tips: decimal between 0 and 0.2 (maybe - also consider custom tips)
+# tips: decimal between 0 and 0.2
 # dates: last year
 ##########
 
@@ -48,7 +48,7 @@ def populate_csv():
     # DATA LISTS FOR EACH COLUMN
     # =================================
     # Configure the number of entries to generate
-    NUM_ENTRIES = 1000
+    NUM_ENTRIES = 1000000
     
     # =================================
     # CONSISTENT EMPLOYEE DATA
@@ -175,10 +175,14 @@ def populate_csv():
     # Costs ($5.00 - $50.00)
     cost_list = [round(random.uniform(5.00, 50.00), 2) for _ in range(NUM_ENTRIES)]
     
-    # Tips (0% - 25% of cost)
-    tip_list = [round(cost_list[i] * random.uniform(0, 0.25), 2) for i in range(NUM_ENTRIES)]
-    
-    # Hours (0-23)
+    # Tips (0% - 50%, skewed toward lower values)
+    # tip_list = [round(cost_list[i] * random.uniform(0, 0.25), 2) for i in range(NUM_ENTRIES)]
+    tip_list = [
+        round(min(random.betavariate(1, 9), 0.5), 2)
+        for i in range(NUM_ENTRIES)
+    ]
+
+    # Hours (0-23 because hours are 11AM-11PM)
     hour_list = [random.randint(11, 23) for _ in range(NUM_ENTRIES)]
     
     # Dates (random dates within the last year)
