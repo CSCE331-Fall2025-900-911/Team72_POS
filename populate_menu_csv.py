@@ -2,13 +2,13 @@ import csv
 import os
 
 
-def populate_sharetea_menu(output_filename: str = "sharetea_menu.csv"):
+def populate_sharetea_menu(output_filename: str = "csv_data/sharetea_menu.csv"):
     """Create a CSV file containing the Sharetea menu items.
 
     Columns: Item ID, Item Name, Item Category, Item Cost, Ingredients
     """
 
-    headers = ["ItemID", "ItemName", "ItemCategory", "ItemCost"]
+    headers = ["ITEM_ID", "ITEM_NAME", "CATEGORY", "PRICE"]
     
     menu_records = [
         (0, "Wintermelon Milk Tea", "Milk Tea", 5.75),

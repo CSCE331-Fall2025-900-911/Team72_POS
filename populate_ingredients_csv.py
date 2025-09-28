@@ -8,7 +8,7 @@ def populate_ingredients_csv(output_filename: str = "csv_data/ingredients.csv"):
     Columns: IngredientID, IngredientName, Quantity, Unit
     """
 
-    headers = ["IngredientID", "IngredientName", "Quantity", "Unit"]
+    headers = ["INGREDIENT_ID", "INGREDIENT_NAME", "QUANTITY", "UNIT"]
 
     # ItemCost stored as integer cents (e.g. $5.65 => 565). Empty/unknown costs => 0
     ingredients = [

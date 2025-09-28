@@ -8,7 +8,7 @@ def populate_recipe_csv(output_filename: str = "csv_data/recipes.csv"):
     Columns: RecipeID, ItemID, IngredientID
     """
 
-    headers = ["RecipeID", "ItemID", "IngredientID"]
+    headers = ["RECIPE_ID", "ITEM_ID", "INGREDIENT_ID"]
 
     recipes = [
         (9, 9, 2),

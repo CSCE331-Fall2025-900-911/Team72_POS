@@ -2,13 +2,13 @@ import csv
 import os
 
 
-def populate_sharetea_menu(output_filename: str = "csv_data\employee_records.csv"):
+def populate_sharetea_menu(output_filename: str = "csv_data/employee_data.csv"):
     """Create a CSV file containing the Gong Cha Employees.
 
     Columns: Employee ID, First Name, Last Name, Password
     """
 
-    headers = ["Employee_ID", "First_Name", "Last_Name", "Password"]
+    headers = ["EMPLOYEE_ID", "FIRST_NAME", "LAST_NAME", "PASSWORD"]
 
     # ItemCost stored as integer cents (e.g. $5.65 => 565). Empty/unknown costs => 0
     employee_records = [

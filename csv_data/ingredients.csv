@@ -1,4 +1,4 @@
-IngredientID,IngredientName,Quantity,Unit
+INGREDIENT_ID,INGREDIENT_NAME,QUANTITY,UNIT
 0,Cup,1000,Cup
 1,Straw,1000,Straw
 2,Pearl,1000,Cups
