@@ -8,31 +8,30 @@ def populate_sharetea_menu(output_filename: str = "sharetea_menu.csv"):
     Columns: Item ID, Item Name, Item Category, Item Cost, Ingredients
     """
 
-    # Use the exact menu requested; ItemCost stored as integer cents (e.g. $5.75 -> 575)
     headers = ["ItemID", "ItemName", "ItemCategory", "ItemCost"]
     
     menu_records = [
-        (0, "Wintermelon Milk Tea", "Milk Tea", 575),
-        (1, "Strawbery Milk Tea", "Milk Tea", 575),
-        (2, "Milk Black Tea", "Milk Tea", 575),
-        (3, "Oolong Tea", "Milk Tea", 575),
-        (4, "Pearl Milk Tea", "Milk Tea", 575),
-        (5, "Caramel Milk Tea", "Milk Tea", 550),
-        (6, "Milk Coffee", "Coffee", 550),
-        (7, "Coffee Milk Tea", "Coffee", 550),
-        (8, "Milk Foam Black Coffee", "Coffee", 600),
-        (9, "Pearl", "Toppings", 75),
-        (10, "Coconut Jelly", "Toppings", 75),
-        (11, "Herbal Jelly", "Toppings", 75),
-        (12, "Ai-Yu Jelly", "Toppings", 75),
-        (13, "White Pearl", "Toppings", 100),
-        (14, "Matcha Tea Latte", "Tea Latte", 575),
-        (15, "Strawberry Matcha Latte", "Tea Latte", 650),
-        (16, "Thai Tea Latte", "Tea Latte", 625),
-        (17, "Lychee", "Slush Series", 675),
-        (18, "Taro Milk", "Slush", 675),
-        (19, "Mango Milk", "Slush Series", 675),
-        (20, "Strawberry Mik", "Slush Series", 675),
+        (0, "Wintermelon Milk Tea", "Milk Tea", 5.75),
+        (1, "Strawbery Milk Tea", "Milk Tea", 5.75),
+        (2, "Milk Black Tea", "Milk Tea", 5.75),
+        (3, "Oolong Tea", "Milk Tea", 5.75),
+        (4, "Pearl Milk Tea", "Milk Tea", 5.75),
+        (5, "Caramel Milk Tea", "Milk Tea", 5.50),
+        (6, "Milk Coffee", "Coffee", 5.50),
+        (7, "Coffee Milk Tea", "Coffee", 5.50),
+        (8, "Milk Foam Black Coffee", "Coffee", 6.00),
+        (9, "Pearl", "Toppings", 0.75),
+        (10, "Coconut Jelly", "Toppings", 0.75),
+        (11, "Herbal Jelly", "Toppings", 0.75),
+        (12, "Ai-Yu Jelly", "Toppings", 0.75),
+        (13, "White Pearl", "Toppings", 1.00),
+        (14, "Matcha Tea Latte", "Tea Latte", 5.75),
+        (15, "Strawberry Matcha Latte", "Tea Latte", 6.50),
+        (16, "Thai Tea Latte", "Tea Latte", 6.25),
+        (17, "Lychee", "Slush Series", 6.75),
+        (18, "Taro Milk", "Slush Series", 6.75),
+        (19, "Mango Milk", "Slush Series", 6.75),
+        (20, "Strawberry Milk", "Slush Series", 6.75),
     ]
 
     csv_filepath = os.path.join(os.getcwd(), output_filename)
@@ -41,10 +40,9 @@ def populate_sharetea_menu(output_filename: str = "sharetea_menu.csv"):
         with open(csv_filepath, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
-            # write rows ensuring cost is integer
             for item in menu_records:
                 item_id, name, category, cost = item
-                writer.writerow([item_id, name, category, int(cost)])
+                writer.writerow([item_id, name, category, float(cost)])
 
     except Exception as e:
         print(f"Error writing menu CSV: {e}")
