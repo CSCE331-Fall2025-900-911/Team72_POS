@@ -161,7 +161,7 @@ def populate_csv():
     c_phone_list = []
     
     for i in range(NUM_ENTRIES):
-        cust_record = customer_records[i % len(customer_records)]
+        cust_record = random.choice(customer_records)
         c_ids.append(cust_record[0])
         c_first_name_list.append(cust_record[1])
         c_last_name_list.append(cust_record[2])
