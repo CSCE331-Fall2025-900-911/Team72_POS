@@ -1,5 +1,10 @@
 1. Weekly Sales History: Given a specific week, how many orders were published?
 
+SELECT COUNT(*) as orders_count
+FROM RECEIPT 
+WHERE ORDER_DATE >= '2024-09-23' 
+  AND ORDER_DATE <= '2024-09-29';
+
 2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
 
 3. Peak Sales Day: Given a specific day, what was the sum of the top 10 order totals
