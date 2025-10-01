@@ -1,0 +1,25 @@
+1. Weekly Sales History: Given a specific week, how many orders were published?
+
+SELECT COUNT(*) as orders_count
+FROM RECEIPT 
+WHERE ORDER_DATE >= '2024-09-23' 
+  AND ORDER_DATE <= '2024-09-29';
+
+2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
+
+3. Peak Sales Day: Given a specific day, what was the sum of the top 10 order totals
+
+4. Menu Item Inventory: Given a specific menu item, how many items from the inventory does that menu item use?
+
+For all items:
+SELECT it.ITEM_NAME, COUNT(r.INGREDIENT_ID) AS ingredient_count
+FROM ITEM it
+JOIN RECIPE r ON it.ITEM_ID = r.ITEM_ID
+GROUP BY it.ITEM_NAME;
+
+For a specific item: 
+SELECT it.ITEM_NAME, COUNT(r.INGREDIENT_ID) AS ingredient_count
+FROM ITEM it
+JOIN RECIPE r ON it.ITEM_ID = r.ITEM_ID
+WHERE it.ITEM_NAME = 'Wintermelon Milk Tea'
+GROUP BY it.ITEM_NAME;
