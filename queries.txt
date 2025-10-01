@@ -2,7 +2,7 @@
 
 SELECT COUNT(*) as orders_count
 FROM RECEIPT 
-WHERE ORDER_DATE BETWEEN '2025-06-08' AND '2025-06-14';
+WHERE ORDER_DATE BETWEEN '2025-06-08' AND ('2025-06-08'::date + INTERVAL '6 days');
 
 2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
 
