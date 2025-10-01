@@ -154,14 +154,22 @@ def populate_csv():
         e_last_name_list.append(emp_record[2])
         e_password_list.append(emp_record[3])
     
-    # Customer data (cycling through the customers)
+    # Customer data (weighted random - some customers visit much more frequently)
     c_ids = []
     c_first_name_list = []
     c_last_name_list = []
     c_phone_list = []
     
+    # Create weighted distribution: some customers are frequent, others rare
+    # Use exponential decay to create realistic customer frequency distribution
+    weights = []
+    for i in range(len(customer_records)):
+        # Higher weight for earlier customers, exponential decay for later ones
+        weight = (len(customer_records) - i) ** 1.5  # Power > 1 creates more skew
+        weights.append(weight)
+    
     for i in range(NUM_ENTRIES):
-        cust_record = random.choice(customer_records)
+        cust_record = random.choices(customer_records, weights=weights, k=1)[0]
         c_ids.append(cust_record[0])
         c_first_name_list.append(cust_record[1])
         c_last_name_list.append(cust_record[2])
