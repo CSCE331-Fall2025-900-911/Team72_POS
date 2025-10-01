@@ -42,3 +42,17 @@ SELECT ITEM_NAME FROM ITEM;
 \prompt 'Select ITEM to see ingredients: '  userINP
 SELECT i.INGREDIENT_NAME FROM ITEM it, INGREDIENT i, RECIPE r
 WHERE it.ITEM_NAME = :'userINP' AND it.ITEM_ID = r.ITEM_ID AND i.INGREDIENT_ID = r.INGREDIENT_ID; 
+
+
+Peak Sales Day: Top 10 Orders:
+SELECT SUM(order_total) AS top_10_order_sum
+FROM (
+    SELECT r.receipt_id, SUM(i.price) + COALESCE(r.tip,0) AS order_total
+    FROM receipt r
+    JOIN orders o ON r.receipt_id = o.receipt_id
+    JOIN item i ON o.item_id = i.item_id
+    WHERE r.order_date = '2025-09-15'
+    GROUP BY r.receipt_id
+    ORDER BY order_total DESC
+    LIMIT 10
+) AS top_orders;
