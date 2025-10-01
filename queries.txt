@@ -4,7 +4,20 @@ SELECT COUNT(*) as orders_count
 FROM RECEIPT 
 WHERE ORDER_DATE BETWEEN '2025-06-08' AND ('2025-06-08'::date + INTERVAL '6 days');
 
-2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
+  2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
+
+
+PREPARE get_by_hour(int) AS
+SELECT
+  r.ORDER_TIME AS hours,
+  COUNT(o.ORDER_ID) AS items_count,
+  SUM(it.PRICE) AS total_revenue
+FROM RECEIPT r
+JOIN ORDERS o ON o.RECEIPT_ID = r.RECEIPT_ID
+JOIN ITEM it  ON it.ITEM_ID = o.ITEM_ID
+WHERE r.ORDER_TIME = $1
+GROUP BY r.ORDER_TIME;
+PREPARE
 
 3. Peak Sales Day: Given a specific day, what was the sum of the top 10 order totals
 
@@ -22,3 +35,10 @@ FROM ITEM it
 JOIN RECIPE r ON it.ITEM_ID = r.ITEM_ID
 WHERE it.ITEM_NAME = 'Wintermelon Milk Tea'
 GROUP BY it.ITEM_NAME;
+
+Select ingredients from a specific file:
+SELECT ITEM_NAME FROM ITEM;
+
+\prompt 'Select ITEM to see ingredients: '  userINP
+SELECT i.INGREDIENT_NAME FROM ITEM it, INGREDIENT i, RECIPE r
+WHERE it.ITEM_NAME = :'userINP' AND it.ITEM_ID = r.ITEM_ID AND i.INGREDIENT_ID = r.INGREDIENT_ID; 
