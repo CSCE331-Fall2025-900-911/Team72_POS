@@ -37,6 +37,18 @@ ORDER BY r.ORDER_DATE, r.ORDER_TIME;
 EXECUTE get_by_day_hour('2025-06-11'::date, 19);
 
 3. Peak Sales Day: Given a specific day, what was the sum of the top 10 order totals
+SELECT SUM(order_total) AS top_10_order_sum
+FROM (
+    SELECT r.receipt_id, SUM(i.price) + COALESCE(r.tip,0) AS order_total
+    FROM receipt r
+    JOIN orders o ON r.receipt_id = o.receipt_id
+    JOIN item i ON o.item_id = i.item_id
+    WHERE r.order_date = '2025-09-15'
+    GROUP BY r.receipt_id
+    ORDER BY order_total DESC
+    LIMIT 10
+) AS top_orders;
+
 
 4. Menu Item Inventory: Given a specific menu item, how many items from the inventory does that menu item use?
 
@@ -60,19 +72,6 @@ SELECT ITEM_NAME FROM ITEM;
 SELECT i.INGREDIENT_NAME FROM ITEM it, INGREDIENT i, RECIPE r
 WHERE it.ITEM_NAME = :'userINP' AND it.ITEM_ID = r.ITEM_ID AND i.INGREDIENT_ID = r.INGREDIENT_ID; 
 
-
-Peak Sales Day: Top 10 Orders:
-SELECT SUM(order_total) AS top_10_order_sum
-FROM (
-    SELECT r.receipt_id, SUM(i.price) + COALESCE(r.tip,0) AS order_total
-    FROM receipt r
-    JOIN orders o ON r.receipt_id = o.receipt_id
-    JOIN item i ON o.item_id = i.item_id
-    WHERE r.order_date = '2025-09-15'
-    GROUP BY r.receipt_id
-    ORDER BY order_total DESC
-    LIMIT 10
-) AS top_orders;
 
 8. Customer Information: Given a receipt number, list the customer and their data (David)
 
