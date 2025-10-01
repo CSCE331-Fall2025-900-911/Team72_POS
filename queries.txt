@@ -42,3 +42,25 @@ SELECT ITEM_NAME FROM ITEM;
 \prompt 'Select ITEM to see ingredients: '  userINP
 SELECT i.INGREDIENT_NAME FROM ITEM it, INGREDIENT i, RECIPE r
 WHERE it.ITEM_NAME = :'userINP' AND it.ITEM_ID = r.ITEM_ID AND i.INGREDIENT_ID = r.INGREDIENT_ID; 
+
+8. Customer Information: Given a receipt number, list the customer and their data (David)
+
+SELECT 
+    c.CUSTOMER_ID,
+    c.FIRST_NAME,
+    c.LAST_NAME,
+    c.PHONE_NUMBER,
+    c.REWARDS_POINTS
+FROM CUSTOMER c
+JOIN RECEIPT r ON c.CUSTOMER_ID = r.CUSTOMER_ID
+WHERE r.RECEIPT_ID = 12345;  -- Replace with your receipt ID
+
+9. Busiest Day: Find the day with the most orders (David)
+
+SELECT 
+    ORDER_DATE,
+    COUNT(*) as orders_count
+FROM RECEIPT 
+GROUP BY ORDER_DATE
+ORDER BY orders_count DESC
+LIMIT 1;
