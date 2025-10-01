@@ -2,8 +2,7 @@
 
 SELECT COUNT(*) as orders_count
 FROM RECEIPT 
-WHERE ORDER_DATE >= '2024-09-23' 
-  AND ORDER_DATE <= '2024-09-29';
+WHERE ORDER_DATE BETWEEN '2025-06-08' AND '2025-06-14';
 
   2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
 
