@@ -35,3 +35,10 @@ FROM ITEM it
 JOIN RECIPE r ON it.ITEM_ID = r.ITEM_ID
 WHERE it.ITEM_NAME = 'Wintermelon Milk Tea'
 GROUP BY it.ITEM_NAME;
+
+Select ingredients from a specific file:
+SELECT ITEM_NAME FROM ITEM;
+
+\prompt 'Select ITEM to see ingredients: '  userINP
+SELECT i.INGREDIENT_NAME FROM ITEM it, INGREDIENT i, RECIPE r
+WHERE it.ITEM_NAME = :'userINP' AND it.ITEM_ID = r.ITEM_ID AND i.INGREDIENT_ID = r.INGREDIENT_ID; 
