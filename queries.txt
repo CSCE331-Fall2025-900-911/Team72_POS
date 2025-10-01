@@ -5,7 +5,20 @@ FROM RECEIPT
 WHERE ORDER_DATE >= '2024-09-23' 
   AND ORDER_DATE <= '2024-09-29';
 
-2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
+  2. Realistic Sales History: Given a specific hour of the day, how many orders were placed, and what was the total sum of orders?
+
+
+PREPARE get_by_hour(int) AS
+SELECT
+  r.ORDER_TIME AS hours,
+  COUNT(o.ORDER_ID) AS items_count,
+  SUM(it.PRICE) AS total_revenue
+FROM RECEIPT r
+JOIN ORDERS o ON o.RECEIPT_ID = r.RECEIPT_ID
+JOIN ITEM it  ON it.ITEM_ID = o.ITEM_ID
+WHERE r.ORDER_TIME = $1
+GROUP BY r.ORDER_TIME;
+PREPARE
 
 3. Peak Sales Day: Given a specific day, what was the sum of the top 10 order totals
 
