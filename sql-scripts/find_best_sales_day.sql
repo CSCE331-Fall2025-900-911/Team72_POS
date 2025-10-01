@@ -1,0 +1,7 @@
+SELECT 
+    ORDER_DATE,
+    COUNT(*) as orders_count
+FROM RECEIPT 
+GROUP BY ORDER_DATE
+ORDER BY orders_count DESC
+LIMIT 1;
