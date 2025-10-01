@@ -19,6 +19,23 @@ WHERE r.ORDER_TIME = $1
 GROUP BY r.ORDER_TIME;
 PREPARE
 
+PREPARE get_by_day_hour(date, int) AS
+SELECT
+  r.ORDER_DATE AS order_date,
+  r.ORDER_TIME AS hours,
+  COUNT(o.ORDER_ID) AS items_count,
+  SUM(it.PRICE)   AS total_revenue
+FROM RECEIPT r
+JOIN ORDERS o ON o.RECEIPT_ID = r.RECEIPT_ID
+JOIN ITEM it   ON it.ITEM_ID = o.ITEM_ID
+WHERE r.ORDER_DATE = $1
+  AND r.ORDER_TIME = $2
+GROUP BY r.ORDER_DATE, r.ORDER_TIME
+ORDER BY r.ORDER_DATE, r.ORDER_TIME;
+
+--run this after the query has been executed
+EXECUTE get_by_day_hour('2025-06-11'::date, 19);
+
 3. Peak Sales Day: Given a specific day, what was the sum of the top 10 order totals
 
 4. Menu Item Inventory: Given a specific menu item, how many items from the inventory does that menu item use?
@@ -56,3 +73,25 @@ FROM (
     ORDER BY order_total DESC
     LIMIT 10
 ) AS top_orders;
+
+8. Customer Information: Given a receipt number, list the customer and their data (David)
+
+SELECT 
+    c.CUSTOMER_ID,
+    c.FIRST_NAME,
+    c.LAST_NAME,
+    c.PHONE_NUMBER,
+    c.REWARDS_POINTS
+FROM CUSTOMER c
+JOIN RECEIPT r ON c.CUSTOMER_ID = r.CUSTOMER_ID
+WHERE r.RECEIPT_ID = 12345;  -- Replace with your receipt ID
+
+9. Busiest Day: Find the day with the most orders (David)
+
+SELECT 
+    ORDER_DATE,
+    COUNT(*) as orders_count
+FROM RECEIPT 
+GROUP BY ORDER_DATE
+ORDER BY orders_count DESC
+LIMIT 1;
